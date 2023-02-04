@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="container">
+ <span id='span_h3'><h3>Editar Folha de Contas</h3></span>
+  <br>
+  <br>
+    <form method="post">
+        <input type="submit" class="btn btn-success" value="Salvar">
+        <a href="/contas" class="btn btn-primary" role="button" aria-pressed="true">Voltar para a Folha de Contas</a>
+        <br>
+        <br>
+       {% csrf_token %}
+       <div class="form-row">
+        <div class="form-group col-md-3">
+           {{ form.dia|as_crispy_field }}
+       </div>    
+       <div class="form-group col-md-7">
+           {{ form.descrição|as_crispy_field }}
+       </div> 
+       <div class="form-group col-md-2">
+          {{ form.símbolo|as_crispy_field }}
+      </div> 
+    </div>
+    <div class="form-row"> 
+      <div class="form-group col-md-3">   
+           {{ form.donativos_Entrada|as_crispy_field }}
+         </div>
+         <div class="form-group col-md-3">
+            {{ form.donativos_Saída|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-3">  
+            {{ form.conta_Entrada|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-3">  
+            {{ form.conta_Saída|as_crispy_field }}
+          </div>
+        </div>
+        <div class="form-row"> 
+          <div class="form-group col-md-3">  
+            {{ form.outra_Entrada|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-3">  
+            {{ form.outra_Saída|as_crispy_field }}
+          </div>
+        </div>
+      </form>
+</form>
+</form>
+</div>
+
+
+{% endblock %}

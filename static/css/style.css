@@ -1,0 +1,388 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=BIZ+UDPGothic:wght@700&family=DM+Serif+Display&family=Dancing+Script&family=Fira+Sans:wght@100&family=Gothic+A1:wght@100;200&family=Karla:wght@200&family=Libre+Baskerville&family=Paytone+One&family=Questrial&family=Staatliches&family=Water+Brush&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=BIZ+UDPGothic:wght@700&family=DM+Serif+Display&family=Dancing+Script&family=Fira+Sans:wght@100&family=Gothic+A1:wght@100;200&family=Karla:wght@200&family=Libre+Baskerville&family=Numans&family=Paytone+One&family=Questrial&family=Staatliches&family=Water+Brush&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=BIZ+UDPGothic:wght@700&family=DM+Serif+Display&family=Dancing+Script&family=Fira+Sans:wght@100&family=Gothic+A1:wght@100;200&family=Karla:wght@200&family=Libre+Baskerville&family=Numans&family=Paytone+One&family=Questrial&family=Staatliches&family=Water+Brush&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+    margin: 0;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Open Sans', sans-serif;
+    background-size: cover;
+}
+
+hr {
+  border-top: 1px solid #094CFA;
+}
+
+#cardhome  {
+  border-radius: 20px;
+ }
+
+#cardhome  a {
+  font-size: 20px;
+  color: #01010f;
+ }
+
+ #cardhome  h3, h5 {
+  font-weight: bold;
+  color: hsl(256, 100%, 50%);
+ } 
+
+#cardhome  a:hover{
+
+  color: hsl(355, 98%, 52%);
+   
+}
+
+marquee {
+  font-size: 25px;
+  color:crimson;
+  font-weight: bold;
+
+}
+
+#rodape{
+  text-align: center;
+  background-color:#f7eab0;
+  border-radius: 20px;
+  font-size: 15px;
+  font-family: 'Open Sans', sans-serif;
+  color: black;
+ 
+}
+
+h4 {
+  background-color: #fff;
+  color: crimson;
+  border-radius: 40px;
+  font-weight: bold;
+  padding:  10px;
+}
+
+#cardlocal  {
+
+  border-radius: 20px;
+  height: 300px;
+  padding: 40px;
+  
+}
+
+#cardlocal  a {
+  font-size: 20px;
+  color: #01010f;
+  text-align: right;
+ }
+
+ #cardlocal  h3, h5 {
+  font-weight: bold;
+  color: hsl(256, 100%, 50%);
+ } 
+
+#cardlocal  a:hover{
+  color: hsl(355, 98%, 52%);
+   
+}
+
+#botaorodape {
+  white-space: normal;
+  text-align: center;
+}
+
+
+
+
+footer {
+  font-size: 14px;
+  color: #fff;
+  vertical-align: middle;
+
+}
+
+
+h3 {
+ font-weight:bolder;
+ text-align: center;
+ color: brown;
+}
+
+#editar {
+  color:forestgreen;
+  margin-left: 5px;
+}
+
+#deletar {
+  color:#f30808;
+  margin-left: 1px;
+}
+
+#b_visualizar {
+  margin-left: 50px;
+  width: 150px;
+  height: 70px;
+}
+[data-md-tooltip] {
+  position: relative;
+  color: green;
+  margin-left: 5px;
+}
+
+[data-md-tooltip]:before {
+    content: attr(data-md-tooltip);
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    padding: 8px;
+    transform: translateX(-50%) scale(0);
+    transition: transform 0.3s ease-in-out;
+    transform-origin: top;
+    background:green;
+    color: white;
+    border-radius: 2px;
+    font-size: 15px;
+    font-family: Roboto,sans-serif;
+    font-weight: 400;
+}
+[data-md-tooltip]:hover:before {
+  transform: translateX(-50%) scale(1); 
+}
+
+
+#bot {
+  width: 120px;
+  height: 60px;
+  font-size: 15px;
+  vertical-align: auto;
+  
+}
+
+#tabela_FC th {
+  text-align: center;
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: 15px;
+  background-color:rgb(228, 225, 214)
+
+}
+
+#tabela_FC td {
+  text-align: center;
+  line-height: 10px;
+  font-size: 15px;
+  
+}
+
+#tabela2_FC {
+
+font-weight: bold;
+
+}
+
+#tabela2_FC th {
+  text-align: center;
+  line-height: 13px;
+  font-size: 13px;
+  font-weight: bold;
+  vertical-align: middle;
+  background-color:rgb(228, 225, 214)
+}
+
+#tabela2_FC td {
+  color: #f30808;
+  text-align: center;
+
+}
+
+#caixa_confronto {
+  justify-content: space-around;
+  text-align: center;
+  line-height: 17px;
+  align-items: center;
+  
+} 
+
+
+
+
+#form_FC {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+
+#cabeça_list2 input{
+  text-align: center;
+  width: 300px;
+  font-size: 15px;
+}
+
+#cabeça_list2 li {
+ 
+  border:none;
+  padding: 1%;
+  line-height: 22px;
+}
+
+#cabeça_list3 li {
+  text-align: left;
+  width: 200px;
+  font-size: 15px;
+  line-height: 23px;
+  padding: 2%;
+  margin-left: auto;
+  border: solid 1px red;
+}
+
+#informe_FC {
+  font-size: 12px;
+}
+
+#tabela3_FC th, td{
+  font-size: 20px;
+  width: 200px;
+}
+
+#tabela_gerais th {
+  line-height: 10px;
+  font-size: 16px;
+  text-align: center;
+  width: 300px;
+ }
+
+#tabela_gerais td {
+  width: 200px;
+  line-height: 35px;
+  font-size: 18px;
+  text-align: center;
+ }
+
+ #tabela_view_gerais th {
+  text-align: center;
+  width: 330px;
+  line-height: 40px;
+
+ }
+
+ #tabela_view_gerais1 th {
+  text-align: center;
+  width: 200px;
+  line-height: 40px;
+
+ }
+
+ #tabela_view_gerais td {
+  text-align: center;
+  width: 240px;
+  line-height: 40px;
+ 
+ } 
+ #tabela_view_gerais1 td {
+  text-align: center;
+  width: 240px;
+  line-height: 40px;
+ 
+ } 
+
+ #tabela_view_gerais2 th {
+  text-align: center;
+  width: 160px;
+  line-height: 20px;
+ 
+ } 
+
+ #tabela_view_gerais2 td {
+  text-align: center;
+  width: 160px;
+  line-height: 20px;
+ 
+ } 
+
+ #tabela_view_gerais3 th {
+  text-align: center;
+  width: 240px;
+  line-height: 20px;
+ 
+ } 
+
+ #tabela_view_gerais3 td {
+  text-align: center;
+  width: 160px;
+  line-height: 20px;
+ 
+ } 
+
+
+#tabela_relatório th{
+  width: 300px;
+  text-align: center;
+}
+#tabela_relatório td{
+  background-color:rgb(228, 225, 214);
+  text-align: center;
+}
+
+#relatório_card button{
+  margin: 5%;
+}
+
+#field input {
+  margin: 1%
+}
+
+#obladi  {
+  background-color:mediumaquamarine;
+ 
+}
+#obladi a {
+  font-size: 25px;
+  color: #01010f;
+  font-weight: bold;
+
+}
+
+#obladi li a {
+  font-size: 20px;
+  color:white;
+  font-weight: bold;
+  margin-left: 250%;
+  padding: 25px;
+ 
+}
+
+
+
+.card-img-top {
+  border-radius: 10%;
+}
+
+
+.navbar-toggler-icon{
+  background-color:darkgrey;
+ 
+ }
+
+.navbar {
+    
+    padding-left: 8%;
+    border-bottom: 3px solid gray;
+ 
+}
+
+.navbar .navbar-nav .nav-link { color:hwb(30 0% 95%); font-size:20px; font-weight: bold; text-align: center; font-family: 'Open Sans', sans-serif;}
+.navbar .navbar-nav .nav-link:hover { background-color:lightgrey; color:  hsl(45, 100%, 2%);font-family: 'Open Sans', sans-serif; } 
+
+
+
+
+#registro_b {
+  margin: 3px;
+  width: 162px;
+  font-size: 15px;
+}
+
+
+.card {
+  border:none;
+}

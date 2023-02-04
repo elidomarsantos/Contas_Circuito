@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="container">
+ <span id='span_h3'><h3>Editar Informações Gerais para Fechamento Mensal</h3></span>
+  <br>
+  <br>
+    <form method="post">
+        <input type="submit" class="btn btn-success" value="Salvar">
+        <a href="/view_gerais_contas" class="btn btn-primary" role="button" aria-pressed="true">Informações Gerais</a>
+         <br>
+        <br>
+        {% csrf_token %}
+        <div class="form-row">
+        <div class="form-group col-md-3">
+            {{ form.congregação|as_crispy_field }}
+        </div>    
+        <div class="form-group col-md-3">
+            {{ form.cidade|as_crispy_field }}
+        </div>    
+        <div class="form-group col-md-2">
+            {{ form.estado|as_crispy_field }}
+        </div>    
+        <div class="form-group col-md-2">
+            {{ form.mês|as_crispy_field }}
+        </div>    
+        <div class="form-group col-md-2">
+            {{ form.ano|as_crispy_field }}
+        </div> 
+        </div>  
+        <div class="form-row"> 
+        <div class="form-group col-md-4">
+            {{ form.data_do_Fechamento|as_crispy_field }}
+        </div>  
+        <div class="form-group col-md-4">
+            {{ form.remessa_Enviada_para_Betel_Resolução|as_crispy_field }}
+        </div> 
+         <div class="form-group col-md-4">
+            {{ form.saldo_Final_do_Extrato_Mensal|as_crispy_field }}
+        </div>  
+    </div> 
+    <div class="form-row">   
+        <div class="form-group col-md-4">
+            {{ form.saldo_Final_do_Extrato_de_Betel|as_crispy_field }}
+        </div>
+              <div class="form-group col-md-4">
+                {{ form.saldo_Final_dos_Donativos_Mês_Anterior|as_crispy_field }}
+            </div> 
+        <div class="form-group col-md-4">
+            {{ form.saldo_Final_da_Conta_Bancária_Mês_Anterior|as_crispy_field }}
+        </div> 
+    </div> 
+    <div class="form-row">    
+        <div class="form-group col-md-4">
+            {{ form.saldo_Final_da_Conta_em_Betel_Mês_Anterior|as_crispy_field }}
+        </div>    
+        <div class="form-group col-md-4">
+            {{ form.servo_de_contas|as_crispy_field }}
+        </div>     
+        <div class="form-group col-md-4">
+            {{ form.secretário|as_crispy_field }}
+        </div>      
+          
+ </form>
+ </div>
+ 
+ {% endblock %}

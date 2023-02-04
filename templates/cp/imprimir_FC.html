@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% load static %}
+<br>
+    <div class="offset-1 col-10 list-div">
+        <h4>Baixar Formulário Folha de Contas?</h4>
+        <br>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-info" value="Gerar Folha de Contas">
+            <a href="{% static 'FC_pronto.pdf' %}"class="btn btn-success" download="Folha de Contas">Baixar</a>
+            <a href="/contas" class="btn btn-danger" role="button" aria-pressed="true">Voltar</a>
+        </form>
+    </div>
+
+
+</html>
+
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<br>
+<div class="container">
+ <span id='span_h3'><h3>Folha de Contas</h3></span>
+<br>
+<div class="row" >
+  <div class="col-sm-12" > 
+    <div class="card">
+           <div id='botoes_gerais' class="card-body"> 
+             <a id="registro_b" href="/view_gerais_contas" class="btn btn-primary" role="button" aria-pressed="true">Informações Gerais</a>
+             <a id="registro_b" href="/resultado" class="btn btn-success" role="button" aria-pressed="true">Confronto e Totais</a>
+             <a id="registro_b" href="/relatório_mensal"  class="btn btn-secondary">Relatório Mensal</a>
+            <a id="registro_b" href="/registro" class="btn btn-secondary">Registro (TO-62)</a>
+            <a id="registro_b" href="/imprimir_FC" class="btn btn-success" role="button" aria-pressed="true">Gerar Formulário</a>
+            
+          </div> 
+        </div> 
+      </div> 
+   </div>   
+ 
+<br>
+<h5>Inserir Movimentações</h5>
+<div class="row">
+  <div class="card-group col-sm-12" id='tabela2_FC'>
+    <div class="card">
+  <div class="card-body">
+
+   <div class='row'>
+    <form method="post">
+     
+       {% csrf_token %}
+       <div class="form-row">
+          <div class="form-group col-md-2" >
+           {{ contas.dia|as_crispy_field }}
+         </div>
+         <div class="form-group col-md-8" >  
+           {{ contas.descrição|as_crispy_field }}
+         </div>
+         <div class="form-group col-md-2" >
+           {{ contas.símbolo|as_crispy_field }}
+         </div>
+         </div>
+       <div class="form-row">
+        <div class="form-group col-md-2" >
+           {{ contas.donativos_Entrada|as_crispy_field }}
+         </div>
+         <div class="form-group col-md-2" >
+           {{ contas.donativos_Saída|as_crispy_field }}
+         </div>
+         <div class="form-group col-md-2" >  
+           {{ contas.conta_Entrada|as_crispy_field }}
+         </div>
+         <div class="form-group col-md-2" >
+           {{ contas.conta_Saída|as_crispy_field }}
+         </div>
+         <div class="form-group col-md-2" >
+           {{ contas.outra_Entrada|as_crispy_field }}
+         </div>
+         <div class="form-group col-md-2" >  
+           {{ contas.outra_Saída|as_crispy_field }}
+         </div>
+         <div class="form-group col-md-2" >  
+          <input type="submit" class="btn btn-success" value="Salvar">
+          
+        </div>
+        <span><a href="/deletar_fc" class="btn btn-danger">Apagar todas as Movimentações</a></span>
+        
+       </div>
+       </div> 
+   </div>
+</form>
+</div>
+</div>
+  <div class="form-group col-md-6">    
+    {% if messages %}
+    <ul class="messages">
+     {% for message in messages %}
+       <li {% if message.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{ message }}</li>
+      {%  endfor %} 
+     </ul>
+     {% endif %}
+    </div>
+
+  <div id='tabela_FC' class="row">
+ <div > 
+  <table class='table table-hover table-bordered table-secondary'>
+      <tbody>
+     
+         <tr>
+           <th>Dia</th>
+           <th width="100%">Descrição</th>
+           <th>Símbolo</th>
+           <th>Donativos (entrada)</th>
+           <th>Donativos (saída)</th>
+           <th>Conta (entrada)</th>
+           <th>Conta (saída)</th>
+           <th>Outra (entrada)</th>
+           <th>Outra (saída)</th>
+           <th>Editar</th>
+           <th>Apagar</th>
+          
+          </tr>
+         {% for a in numeros %} 
+        <tr>
+          <td>{{ a.dia|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.descrição|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.símbolo|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.donativos_Entrada|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.donativos_Saída|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.conta_Entrada|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.conta_Saída|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.outra_Entrada|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.outra_Saída|default_if_none:"&nbsp;" }}</td>
+
+
+          <td><a href="/editar_fc/{{a.id}}"><i class="material-icons" data-md-tooltip="Editar">edit</i></a></td>
+          <td><a href="/deletar_fc/{{a.id}}"><i class="material-icons" style=color:crimson data-md-tooltip="Apagar">delete</i></a></td>
+         
+            
+        </tr>
+        {% endfor %} 
+    </tbody>
+    </table>
+</div>  
+</div> 
+
+       
+</div>  
+</div>  
+</div>  
+</div>  
+
+{% endblock %}

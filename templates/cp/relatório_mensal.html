@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="container">
+<h3 style="text-align:center;">Relatório Mensal</h3>
+<br>
+<div class="row">
+<div class="col-md-12"> 
+  <div class="card">
+         <div id='botoes_gerais' class="card-body"> 
+          <form method="POST">
+            {% csrf_token %}
+                  
+                 <a id="registro_b" href="/view_gerais_contas" class="btn btn-primary" role="button" aria-pressed="true">Informações Gerais</a>
+                 <a id="registro_b" href="/resultado" class="btn btn-success" role="button" aria-pressed="true">Confronto e Totais</a>
+                 <a id="registro_b" href="/contas"  class="btn btn-secondary">Folha de Contas</a>
+                 <a id="registro_b" href="/registro" class="btn btn-secondary">Registro (TO-62)</a>
+                 <input id="registro_b" type="submit" class="btn btn-info" value="Gerar Relatório">
+                 <a id="registro_b" href="{% static 'relatório_pronto.pdf' %}"class="btn btn-success" download="Relatório Mensal">Baixar</a>
+            </form>  
+            </div> 
+             
+         {% if messages %}
+         <ul class="messages">
+          {% for message in messages %}
+            <li {% if message.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{ message }}</li>
+           {%  endfor %} 
+          </ul>
+          {% endif %}
+      </div> 
+      </div> 
+ </div>  
+ <div class="row">
+   <div class="col-sm-6">
+     <div class="card">
+       <div class="card-body" >
+        <table class='table table-hover table-bordered table-secondary'id="tabela_view_gerais2">
+       <tbody>
+         <tr>
+             <th >Congregação:</th>
+             {% for a in relatório %} 
+             <td style="color:red">{{ a.congregação|default_if_none:"&nbsp;" }}</td>
+             {% endfor %} 
+          </tr> 
+          <tr>
+            <th >Mês/Ano:</th>
+            <td style="color:red">{{ mês_ano|default_if_none:"&nbsp;" }}</td>
+          </tr>
+    </tbody>
+    </table>
+       </div>
+     </div>
+   </div>
+   
+   <div class="col-sm-6">
+     <div class="card">
+       <div class="card-body" >
+        <table class='table table-hover table-bordered table-secondary'id="tabela_view_gerais3">
+       <tbody>
+          <tr>  
+            <th >Saldo Disponível no Início do Mês: </th>
+              <td style="color:red">{{ saldo_total_mês_anterior|floatformat:2}}</td>
+          </tr>
+          <tr>
+            <th >Saldo Disponível no Fim do Mês: </th>
+            <td style="color:red">{{ saldo_mês_atual|floatformat:2}}</td>
+         
+           </tr>
+          </tbody>
+        </table> 
+       </div>
+     </div>
+   </div>
+ </div> 
+  <div class="row">
+   <div class="col-sm-6">
+     <div class="card">
+       <div class="card-body">
+         <h5 class="card-title">Entradas</h5>
+         <table class='table table-hover table-bordered table-secondary'id="tabela_view_gerais3">
+       <tbody>
+         <tr>
+          <th>Donativos para Congregação (caixas)</th>
+          <td>{{ total_C|floatformat:2}}</td>
+       </tr>
+       <tr>
+        <th>Donativos para Congregação (Conta Bancária)</th>
+       <td>{{ total_CE|floatformat:2}}</td>
+    </tr>
+          <tr>
+          <th>Donativos para Fundos em Betel</th>
+          {% for a in relatório %} 
+          <td>{{ out_ent_value|floatformat:2}}</td>
+          {% endfor %} 
+       </tr>
+          <tr>
+          <th>Rendimentos da Conta</th>
+          {% for a in relatório %} 
+          <td>{{ rendimentos|floatformat:2}}</td>
+          {% endfor %} 
+       </tr>
+          <tr>
+          <th>Obra Mundial (caixas)</th>
+          {% for a in relatório %} 
+          <td>{{total_O|floatformat:2}}</td>
+          {% endfor %} 
+       </tr>
+       <tr>
+        <th>Renovação de Betel (caixas)</th>
+        {% for a in relatório %} 
+        <td>{{ total_CF|floatformat:2}}</td>
+        {% endfor %} 
+     </tr>
+     <th>Donativos para Transporte</th>
+     {% for a in relatório %} 
+     <td>{{ transporte|floatformat:2}}</td>
+     {% endfor %} 
+    </tr>
+       <tr>
+          <th>Total das Entradas</th>
+        {% for a in relatório %} 
+        <td>{{ total_das_entradas|floatformat:2}}</td>
+        {% endfor %} 
+     </tr>
+     <tr>
+      <th><span style="color:green">{{ outras_ent_1_mot|default_if_none:"&nbsp;"}}</span></th>
+      <td>{{ outras_ent_1|floatformat:2}}</td>
+   </tr>
+ </tbody>
+ </table>
+       </div>
+     </div>
+   </div>
+   <div class="col-sm-6">
+     <div class="card">
+       <div class="card-body">
+         <h5 class="card-title">Saídas</h5>
+         <table class='table table-hover table-bordered table-secondary'id="tabela_view_gerais3">
+       <tbody>
+      <tr> 
+           <th>Despesas Operacionais</th>
+          {% for a in relatório %} 
+          <td>{{ total_G|floatformat:2}}</td>
+          {% endfor %} 
+       </tr>
+       <tr>
+          <th>Obra Mundial - Resolução</th>
+          {% for a in relatório %} 
+          <td>{{ a.remessa_Enviada_para_Betel_Resolução|floatformat:2}}</td>
+          {% endfor %} 
+       </tr>
+       <tr>
+          <th>Obra Mundial (caixas)</th>
+          {% for a in relatório %} 
+          <td>{{total_O|floatformat:2}}</td>
+          {% endfor %} 
+       </tr>
+       <tr>
+        <th>Renovação de Betel (caixas)</th>
+        {% for a in relatório %} 
+        <td>{{total_CF|floatformat:2}}</td>
+        {% endfor %} 
+     </tr>
+     <tr>
+      <th>Total a ser Enviado para Betel</th>
+      {% for a in relatório %} 
+      <td>{{total_betel|floatformat:2}}</td>
+      {% endfor %} 
+   </tr>
+   <tr>
+    <th>Total de Despesas</th>
+    {% for a in relatório %} 
+    <td>{{ total_das_despesas|floatformat:2 }}</td>
+    {% endfor %} 
+ </tr>
+        <tr>
+          <th><span style="color:green">{{ outras_sai_1_mot|default_if_none:"&nbsp;"}}</span></th>
+          <td>{{ outras_sai_1|floatformat:2}}</td>
+       </tr>
+       <tr>
+        <th><span style="color:green">{{ fundos_reservados_desc|default_if_none:"&nbsp;"}}</span></th>
+        <td>{{ fundos_reservados|floatformat:2}}</td>
+     </tr>
+       
+    </tbody>
+ </table>
+       </div>
+     </div>
+   </div>
+ </div>
+ <div class="row" >
+  <div class="col-sm-12">
+    <form method="GET"> 
+      {% csrf_token %} 
+   
+   <div class="card-body">
+    <p style="font-size: 15px">Os dados da tabela acima são preenchidos com o lançado em "Informações Gerais" e na "Folha de Contas" <span style="color:green"><b>exceto as informações em verde. Estas são preenchidas pelo formulário abaixo, quando necessário. Preencha estas últimas apenas imediatamente antes de gerar o documento<b></span> </p>
+    <a><button type="submit" class="btn btn-primary">Ok</button></a>
+    <a><button type="submit" class="btn btn-danger">Limpar Informações Abaixo</button></a>   
+  </div>
+
+        <div class="card-group">
+          <div class="card">
+               <div class="card-body">
+              <h5>Outras Entradas de Valores</h5>
+              <fieldset >
+                <input type="text" size="20" name="outras_ent_1_mot" placeholder="Informe a Descrição">
+                <br>
+                <br>
+                <input type="number" step="0.01" size="20" name="outras_ent_1" placeholder="Informe o Valor"> 
+                 </fieldset>
+            </div>
+          </div>
+          <div class="card">
+            
+            <div class="card-body">
+              <h5>Outras Saídas de Valores</h5>
+              <fieldset >
+                
+                <input type="text" size="20" name="outras_sai_1_mot" placeholder="Informe a Descrição">
+                <br>
+                <br>
+                <input type="number" step="0.01" size="20" name="outras_sai_1" placeholder="Informe o Valor"> 
+          
+               </fieldset>
+             </div>
+          </div>
+          <div class="card">
+             <div class="card-body">
+              <h5>Fundos Reservados</h5>
+              <fieldset >
+                 <input type="text" step="0.01" size="20" name="fundos_reservados_desc" placeholder="Informe a Descrição">
+                 <br>
+                 <br>
+                <input type="number" step="0.01" size="20" name="fundos_reservados" placeholder="Informe o Valor">
+               
+                </fieldset>
+            </div>
+          </div>
+      
+        </div>
+  </div>
+  </div>
+</div>
+
+{% endblock %}
+
+ 

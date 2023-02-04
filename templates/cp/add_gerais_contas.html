@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="container">
+ <span id='span_h3'><h3>Informações Gerais para Fechamento Mensal</h3></span>
+  <br>
+  <br>
+  
+    <form method="post">
+        <input type="submit" class="btn btn-success" value="Salvar">
+        <br>
+        <br>
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                {{ gerais.congregação|as_crispy_field }}
+            </div>    
+            <div class="form-group col-md-3">
+                {{ gerais.cidade|as_crispy_field }}
+            </div>    
+            <div class="form-group col-md-2">
+                {{ gerais.estado|as_crispy_field }}
+            </div>    
+            <div class="form-group col-md-2">
+                {{ gerais.mês|as_crispy_field }}
+            </div>    
+            <div class="form-group col-md-2">
+                {{ gerais.ano|as_crispy_field }}
+            </div> 
+            </div>  
+            <div class="form-row"> 
+            <div class="form-group col-md-4">
+                {{ gerais.data_do_Fechamento|as_crispy_field }}
+            </div>  
+            <div class="form-group col-md-4">
+                {{ gerais.remessa_Enviada_para_Betel_Resolução|as_crispy_field }}
+            </div> 
+              <div class="form-group col-md-4">
+                {{ gerais.saldo_Final_do_Extrato_Mensal|as_crispy_field }}
+            </div>  
+        </div> 
+        <div class="form-row"> 
+            <div class="form-group col-md-4">
+                {{ gerais.saldo_Final_do_Extrato_de_Betel|as_crispy_field }}
+            </div>
+                  <div class="form-group col-md-4">
+                    {{ gerais.saldo_Final_dos_Donativos_Mês_Anterior|as_crispy_field }}
+                </div> 
+            <div class="form-group col-md-4">
+                {{ gerais.saldo_Final_da_Conta_Bancária_Mês_Anterior|as_crispy_field }}
+            </div> 
+        </div> 
+        <div class="form-row">  
+            <div class="form-group col-md-4">
+                {{ gerais.saldo_Final_da_Conta_em_Betel_Mês_Anterior|as_crispy_field }}
+            </div>   
+            <div class="form-group col-md-4">
+                {{ gerais.servo_de_contas|as_crispy_field }}
+            </div> 
+            <div class="form-group col-md-4">
+                {{ gerais.secretário|as_crispy_field }}
+            </div> 
+        </div> 
+          
+ </form>
+ </div>
+ 
+ {% endblock %}

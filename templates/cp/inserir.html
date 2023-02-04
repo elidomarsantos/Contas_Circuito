@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<br>
+    <div class="offset-1 col-10 list-div">
+        <h4>Confirma inclusão de uma linha abaixo?</h4>
+        <br>
+        <form method="POST">
+            {% csrf_token %}
+             <input type="submit" class="btn btn-success" value="OK" name="ok" id="ok" >
+             <a href="/contas" class="btn btn-danger" role="button" aria-pressed="true">Cancelar</a>
+        </form>
+    </div>
+
+
+</html>
+
+{% endblock %}

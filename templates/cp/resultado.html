@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<br>
+<div class="container">
+ <span id='span_h3'><h3>Confronto e Totais </h3></span>
+<br>
+<div class="row" >
+  <div class="col-sm-12" > 
+    <div class="card">
+           <div id='botoes_gerais' class="card-body"> 
+             <a id="registro_b" href="/view_gerais_contas" class="btn btn-primary" role="button" aria-pressed="true">Informações Gerais</a>
+             <a id="registro_b" href="/contas"  class="btn btn-secondary">Folha de Contas</a>
+             <a id="registro_b" href="/relatório_mensal"  class="btn btn-secondary">Relatório Mensal</a>
+            <a id="registro_b" href="/registro" class="btn btn-secondary">Registro (TO-62)</a>
+            
+            </div> 
+        </div> 
+      </div> 
+   </div>   
+ 
+  <div class="row">
+    <div >
+      <div class="card">
+        <div class="card-body">
+          <h5>Confronto</h5>
+             <p style='font-size: 15px'>Após o lançamento de todas as informações em "Informações Gerais", lançar na "Folha de Contas" todos os recibos e movimentações contidas no extrato, e outras informações de valores extras que sejam necessários no "Relatório Mensal", <span style="color:brown"><b> os valores nas colunas 01, 02 e 03 abaixo devem ser iguais.</b></span> Em caso de diferença, conferir todos os lançamentos. O mês só deve ser considerado "fechado" quando esta condição for atendida.
+             </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" id='caixa_confronto'>
+  <div class="col-sm-3">
+    <div class="card">
+      <div class="card-body" >
+        <h5 class="card-title">Resultado do Confronto</h5>
+        {% if saldo_final_extrato_betel == sal_final_betel and total_total == saldo_mês_atual and saldo_conta_extrato_sem_betel == sal_final_con %}
+              <p><button type="button" class="btn btn-success">Fechamento OK!</button></p>
+              {% else %}
+              <p><button type="button" class="btn btn-danger">Alguma (s) Coluna com <br>Valores Diferentes</button></p>
+              {% endif %} 
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">01</h5>
+        <table class="table" id='tabela2_FC' >
+          <tbody>
+              <tr>
+                <th >Saldo Total <br>Disponível, Conforme Folha <br>de Contas</th>
+              </tr>
+              <tr>
+                 <td>{{ total_total|floatformat:2 }}</td>
+              </tr>
+              <tr>
+                <th >Saldo Total Disponível Conforme Relatório Mensal</th>
+              </tr>
+              <tr>
+                <td>{{ saldo_mês_atual |floatformat:2 }}</td>
+               </tr>
+               <tr>
+                {% if total_total == saldo_mês_atual %}
+                <td><button type="button" class="btn btn-success">Valores Iguais</button></td>
+                {% else %}
+                <td><button type="button" class="btn btn-danger">Valores Diferentes</button></td>
+                {% endif %} 
+              </tr>
+            </tbody>
+          </table> 
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">02</h5>
+	<table class="table" id='tabela2_FC' >
+        <tbody>
+              <tr>
+                <th >Saldo da Conta Bancária <br>no Fim do Mês, (último valor do mês, conforme extrato)</th>
+              </tr>
+              <tr>
+                <td>{{ saldo_conta_extrato_sem_betel|floatformat:2 }}</td>
+              </tr>
+              <tr>
+                <th >Saldo da Conta Bancária no Fim do Mês</th>
+              </tr>
+              <tr>
+                <td>{{ sal_final_con|floatformat:2 }}</td>
+              </tr>
+              <tr>
+                {% if saldo_conta_extrato_sem_betel == sal_final_con %}
+                <td><button type="button" class="btn btn-success">Valores Iguais</button></td>
+                {% else %}
+                <td><button type="button" class="btn btn-danger">Valores Diferentes</button></td>
+                {% endif %} 
+              </tr>
+            </tbody>
+          </table> 
+      </div>
+    </div>
+  </div>
+<div class="col-sm-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">03</h5>
+        <table class="table" id='tabela2_FC' >
+          <tbody>
+              <tr>
+                <th >Saldo da Conta <br>em Betel <br> no Fim do Mês</th>
+              </tr>
+              <tr>
+                <td>{{ saldo_final_extrato_betel|floatformat:2 }}</td>
+              </tr>
+              <tr>
+                <th >Saldo da Conta em Betel no Fim do Mês</th>
+              </tr>
+              <tr>
+                <td>{{ sal_final_betel|floatformat:2 }}</td>
+              </tr>
+              <tr>
+                {% if saldo_final_extrato_betel == sal_final_betel %}
+                <td><button type="button" class="btn btn-success">Valores Iguais</button></td>
+                {% else %}
+                <td><button type="button" class="btn btn-danger">Valores Diferentes</button></td>
+                {% endif %} 
+              </tr>
+            </tbody>
+          </table> 
+      </div>
+    </div>
+  </div>
+
+</div>
+   <br>
+  <div class="col-ms-12">
+    <div class="card" >
+     <div class="card-body" >
+      <h5>Outros Dados Importantes</h5>
+   <table class="table" id='tabela2_FC'>
+     <tbody>
+         <tr>
+            <th>Donativos (entrada)</th>
+           <th>Donativos (saída)</th>
+           <th>Conta (entrada)</th>
+           <th>Conta (saída)</th>
+           <th>Fundos em Betel (entrada)</th>
+           <th>Fundos em Betel (saída)</th>
+           <th>Saldo Final Donativos</th>
+           <th>Donativos Congregação (caixas e TE)</th>
+           <th>Total a ser enviado p/Betel</th>
+           <th>Total Despesas</th>
+          </tr>
+         <tr>
+           
+           <td>{{ don_ent_value|floatformat:2 }}</td>
+           <td>{{ don_sai_value|floatformat:2 }}</td>
+           <td>{{ con_ent_value|floatformat:2 }}</td>
+           <td>{{ con_sai_value|floatformat:2 }}</td>
+           <td>{{ out_ent_value|floatformat:2 }}</td>
+           <td>{{ out_sai_value|floatformat:2 }}</td>
+           <td>{{ sal_final_don|floatformat:2 }}</td>
+           <td>{{ total_C_TE|floatformat:2 }}</td>
+           <td>{{ total_betel|floatformat:2 }}</td>
+           <td>{{ total_G|floatformat:2 }}</td>
+           
+         </tr>
+       </tbody>
+     </table>
+         </div>
+     </div>
+  </div> 
+</div>  
+
+{% endblock %}

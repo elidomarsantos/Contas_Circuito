@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<br>
+<div class="container">
+<h3 style="text-align:center;">Registro de Transferência de Fundos (TO-62)</h3>
+<br>
+<div class="row">
+<div class="col-md-12"> 
+  <div id='botoes_gerais' class="card">
+    <form method="POST">
+      {% csrf_token %}
+         <div class="card-body" > 
+                 <a id="registro_b"href="/view_gerais_contas" class="btn btn-primary" role="button" aria-pressed="true">Informações Gerais</a>
+                 <a id="registro_b" href="/resultado" class="btn btn-success" role="button" aria-pressed="true">Confronto e Totais</a>
+                 <a id="registro_b" href="/contas"  class="btn btn-secondary">Folha de Contas</a>
+                 <a id="registro_b" href="/relatório_mensal" class="btn btn-secondary">Relatório Mensal</a>
+                 <input id="registro_b" type="submit" class="btn btn-info" value="Gerar Registro">
+                 <a id="registro_b" href="{% static 'registro_pronto.pdf' %}"class="btn btn-success" download="TO-62">Baixar</a>
+             
+               </div> 
+              </form>   
+         {% if messages %}
+         <ul class="messages">
+          {% for message in messages %}
+            <li {% if message.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{ message }}</li>
+           {%  endfor %} 
+          </ul>
+          {% endif %}
+      </div> 
+      </div> 
+ </div>  
+ <div class="row">
+   <div class="col-sm-6">
+     <div class="card">
+       <div class="card-body" >
+        <table class='table table-hover table-bordered table-secondary'id="tabela_view_gerais2">
+       <tbody>
+         <tr>
+             <th >Congregação</th>
+             {% for a in relatório %} 
+             <td>{{ a.congregação|default_if_none:"&nbsp;" }}</td>
+             {% endfor %} 
+          </tr> 
+          <tr>
+            <th >Total de Fundos Enviados</th>
+             <td >{{ total_enviados|floatformat:2}}</td>
+          </tr>
+          <tr>
+            <th  style="color:green">Outra Finalidade</th>
+            <td>{{ valor_da_finalidade1|floatformat:2}}</td>
+          </tr>
+          <tr>
+            <th  style="color:green">Data da Transação</th>
+            <td>{{ data_da_transação|default_if_none:"&nbsp;" }}</td><br>
+          </tr>
+    </tbody>
+    </table>
+       </div>
+     </div>
+   </div>
+   <div class="col-sm-6">
+     <div class="card">
+       <div class="card-body">
+        <table class='table table-hover table-bordered table-secondary'id="tabela_view_gerais3">
+       <tbody>
+        <tr>
+            <th>Obra Mundial (caixas)</th>
+            {% for a in relatório %} 
+            <td >{{ total_O|floatformat:2}}</td>
+            {% endfor %} 
+         </tr>
+         <tr>
+          <th>Obra Mundial - Resolução</th>
+          {% for a in relatório %} 
+          <td>{{ remessa_betel_resolução|floatformat:2}}</td>
+          {% endfor %} 
+       </tr>
+       <tr>
+        <th>Renovação de Betel</th>
+        {% for a in relatório %} 
+        <td>{{ total_CF|floatformat:2}}</td>
+        {% endfor %} 
+     </tr>
+     <tr>
+      <th  style="color:green">Número de Confirmação</th>
+      <td>{{ confirmação|default_if_none:"&nbsp;" }}</td><br>
+    </tr>
+
+          </tbody>
+    </table> 
+       </div>
+     </div>
+   </div>
+<div class="row" >
+  <div class="col-sm-12">
+    <form method="GET"> 
+      {% csrf_token %} 
+   
+   <div class="card-body">
+    <p style="font-size: 15px">Os dados da tabela acima são preenchidos com o lançado em "Informações Gerais" e na "Folha de Contas" <span style="color:green"><b>exceto as informações em verde. Estas são preenchidas pelo formulário abaixo, quando necessário. Preencha estas últimas apenas imediatamente antes de gerar o documento<b></span> </p>
+    <a><button type="submit" class="btn btn-primary">Ok</button></a>
+    <a><button type="submit" class="btn btn-danger">Limpar Informações Abaixo</button></a>   
+  </div>
+
+        <div class="card-group">
+          <div class="card">
+               <div class="card-body">
+              <h5>Outras Finalidades</h5>
+              <fieldset >
+                <input type="text" size="20" name="finalidades1" placeholder="Informe a Descrição">
+                <br>
+                <br>
+              
+               <input type="number" step="0.01" size="20" name="valor_finalidades1" placeholder="Informe o Valor"> 
+              
+               </fieldset>
+            </div>
+          </div>
+          <div class="card">
+            
+            <div class="card-body">
+              <h5>Data da Transação</h5>
+              <fieldset >
+                <input type='date' size="30" name="data" placeholder="Informe a Data">
+               
+               </fieldset>
+             </div>
+          </div>
+          <div class="card">
+             <div class="card-body">
+              <h5>Número de Confirmação</h5>
+              <fieldset >
+                <input type="text" size="15" name="confirmação" placeholder="Informe o Número">
+              
+                 </fieldset>
+            </div>
+          </div>
+        </div>
+  </div>
+  </div>
+   </div>
+
+
+{% endblock %}
